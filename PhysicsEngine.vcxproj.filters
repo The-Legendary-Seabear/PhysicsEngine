@@ -27,6 +27,18 @@
     <ClInclude Include="Random.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Effector.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point_Effector.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GravitationalEffector.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -38,6 +50,11 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Point_Effector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GravitationalEffector.cpp" />
+    <ClCompile Include="Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">

@@ -3,18 +3,24 @@
 #include "raymath.h"
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include <vector>
+#include <string>
 
 #include "../Body.h"
 #include "../World.h"
 #include "../Random.h"
+#include "../Point_Effector.h"
+#include "../GravitationalEffector.h"
 
 int main ()
 {
+SetRandomSeed(5);
 	Random random;
 	World world;
-	world.bodies.reserve(1000);
 
-SetRandomSeed(5);
+	//SetTargetFPS(60);
+	float timeAccum = 0.0f;
+	float fixedTimeStep = 1.0f / 60.0f; // 0.016 * 60.0 = 1.0
+
 
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
@@ -28,6 +34,9 @@ SetRandomSeed(5);
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 	
+	//world.AddEffector(new PointEffector(Vector2{ 200,200 }, 100, 30000.0f));
+	//world.AddEffector(new GravitationalEffector(10000.0f));
+
 	// game loop
 	while (!WindowShouldClose())		// run the loop until the user presses ESCAPE or presses the Close button on the window
 	{
@@ -35,18 +44,24 @@ SetRandomSeed(5);
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || (IsKeyDown(KEY_LEFT_CONTROL) && IsMouseButtonDown(MOUSE_BUTTON_LEFT)))
 		{
-			Body body = { 0 };
+			Body body;
+			body.bodyType = (IsKeyDown(KEY_LEFT_ALT)) ? BodyType::Static : BodyType::Dynamic;
 			body.position = GetMousePosition();
 			float angle = random.GetRandomFloat() * (2 * PI);
 			Vector2 direction;
 			direction.x = cosf(angle);
 			direction.y = sinf(angle);
 
-			body.velocity = Vector2Scale(direction, random.GetRandomFloat() * 300);//direction * (GetRandomFloat() * 500);
+			body.AddForce(direction * (50.0f + (random.GetRandomFloat() * 500)), ForceMode::VelocityChange);
+
+			//body.velocity = Vector2Scale(direction, random.GetRandomFloat() * 300);//direction * (GetRandomFloat() * 500);
 			body.acceleration = Vector2{ 0, 0 };
 			body.size = 5.0f + (random.GetRandomFloat() * 20.0f);
 			body.restitution = 0.75f + (random.GetRandomFloat() * 0.5f);
-			body.mass = 1.0f;
+			body.mass = body.size;
+			body.inverseMass = (body.bodyType == BodyType::Static) ? 0 : 1.0f / body.mass;
+			body.gravityScale = 1.0f;
+			body.damping = 2.5f;
 
 			world.AddBody(body);
 		}
@@ -63,7 +78,12 @@ SetRandomSeed(5);
 			DrawCircleLinesV(position, 100, WHITE);
 		}
 
-		world.Step(dt);
+		timeAccum += dt;
+		while (timeAccum > fixedTimeStep) 
+		{
+			world.Step(fixedTimeStep);
+			timeAccum -= fixedTimeStep;
+		}
 
 		//DRAW
 
@@ -73,11 +93,11 @@ SetRandomSeed(5);
 		// Setup the back buffer for drawing (clear color and depth buffers)
 		ClearBackground(BLACK);
 
-		// draw some text using the default font
-		DrawText("Hello Raylib", 200,200,20,WHITE);
+		std::string fpsText = "FPS: ";
+		fpsText += std::to_string(GetFPS());
 
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
+		// draw some text using the default font
+		DrawText(fpsText.c_str(), 100, 100, 20, WHITE);
 
 		
 		world.Draw();
