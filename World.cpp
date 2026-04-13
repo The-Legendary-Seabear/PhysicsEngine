@@ -17,6 +17,7 @@ void World::Step(float dt)
 	contacts.clear();
 	CreateContacts(bodies, contacts);
 	SeparateContacts(contacts);
+	ResolveContacts(contacts);
 
 	for (auto& body : bodies) {
 		if (body.position.x + body.size > GetScreenWidth()) 
