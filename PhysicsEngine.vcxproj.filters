@@ -18,26 +18,44 @@
     <ClInclude Include="include\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Drag_Effector.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Body.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Effector.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Point_Effector.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GravitationalEffector.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Effector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GravitationalEffector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point_Effector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Area_Effector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui_physics.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raygui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world_camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -53,8 +71,23 @@
     <ClCompile Include="Point_Effector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GravitationalEffector.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Effector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Drag_Effector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Area_Effector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GravitationalEffector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Spring.cpp" />
+    <ClCompile Include="world_camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">

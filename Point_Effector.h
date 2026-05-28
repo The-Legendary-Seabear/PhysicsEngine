@@ -5,16 +5,14 @@ class PointEffector : public Effector
 {
 public:
 	PointEffector(Vector2 posiiton, float size, float forceMagnitude) :
-		position{ position },
-		size{size},
+		Effector{ posiiton, size },
 		forceMagnitude{forceMagnitude}
 	{}
 
 	void Apply(std::vector<Body>& bodies) override;
-	void Draw();
+	void Draw() override;
 
 private:
-	Vector2 position;
-	float size;
+	
 	float forceMagnitude;
 };
